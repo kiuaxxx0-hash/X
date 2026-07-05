@@ -3,7 +3,7 @@ package com.x.launcher.engine
 import android.content.Context
 import android.widget.Toast
 import com.x.launcher.libs.LibsEnvironmentManager
-import com.x.launcher.libs.UltimateLibsEngine
+import com.x.launcher.libs.StandaloneLibsRegistry
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -11,8 +11,8 @@ import java.io.File
 class MinecraftLauncher(private val context: Context) {
 
     /**
-     * Constructs advanced JVM argument streams and hooks cutting-edge dual graphics 
-     * translation engines (Mesa 3D Zink Vulkan Pipelines) directly to rank #1 in FPS performance.
+     * Constructs advanced JVM argument streams and maps the custom independent 
+     * standalone optimization files dynamically to rank #1 in performance.
      */
     suspend fun bootGame(config: LaunchConfig, mojangLibraries: List<String>): Boolean {
         return withContext(Dispatchers.IO) {
@@ -28,9 +28,9 @@ class MinecraftLauncher(private val context: Context) {
                     return@withContext false
                 }
 
-                // Deploy and verify our absolute #1 private ultimate libraries suite inside the filesystem
-                val libsEngine = UltimateLibsEngine(context)
-                libsEngine.deployUltimateLibrariesBundle(config.gameDirectory)
+                // Deploy and verify the 6 structural standalone premium file splits inside storage indexes
+                val standaloneRegistry = StandaloneLibsRegistry(context)
+                standaloneRegistry.installStandaloneLibraries(config.gameDirectory)
 
                 // SECURITY OVERRIDE: Unlock Linux execution tokens inside Android sandbox filesystems
                 try {
@@ -46,7 +46,7 @@ class MinecraftLauncher(private val context: Context) {
                 // Set low-level runtime dependencies pointer
                 commandList.add("-Djava.library.path=${nativesFolder.absolutePath}")
                 
-                // Assemble Classpath stream components together
+                // Append Main jar and total Mojang Classpath metrics together
                 commandList.add("-cp")
                 val classpathBuilder = StringBuilder()
                 classpathBuilder.append(gameJar.absolutePath)
@@ -74,8 +74,7 @@ class MinecraftLauncher(private val context: Context) {
                 processBuilder.directory(config.gameDirectory)
                 processBuilder.redirectErrorStream(true)
 
-                // INVOKE SYSTEMIC LIBS REDIRECTION INTERFACES
-                // Injects the complete Vulkan graphics pipeline and dynamic library hooks cleanly
+                // INVOKE DETACHED LIBS ENVIRONMENT INJECTORS
                 val environmentManager = LibsEnvironmentManager()
                 environmentManager.injectSecretPerformanceVariables(processBuilder, config.gameDirectory)
 
