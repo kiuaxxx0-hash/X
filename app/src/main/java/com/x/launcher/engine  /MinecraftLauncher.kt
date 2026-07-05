@@ -9,10 +9,10 @@ import java.io.File
 class MinecraftLauncher(private val context: Context) {
 
     /**
-     * Constructs the official JVM argument stream parameters and hooks dynamic 
-     * compiled native SDK components directly into the active runtime processes channel.
+     * Constructs the official JVM argument stream parameters, binds custom native 
+     * graphics configurations, and expands the complete loaded Mojang Classpath stream.
      */
-    suspend fun bootGame(config: LaunchConfig): Boolean {
+    suspend fun bootGame(config: LaunchConfig, mojangLibraries: List<String>): Boolean {
         return withContext(Dispatchers.IO) {
             try {
                 val gameJar = File(config.gameDirectory, "client-${config.gameVersion}.jar")
@@ -20,23 +20,34 @@ class MinecraftLauncher(private val context: Context) {
                 
                 if (!gameJar.exists() || !nativesFolder.exists()) {
                     withContext(Dispatchers.Main) {
-                        Toast.makeText(context, "Error: Game assets or SDK Natives missing! Aborting boot.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, "Error: Critical game core files or natives missing! Aborting boot.", Toast.LENGTH_LONG).show()
                     }
                     return@withContext false
                 }
 
-                // Construct complete system configuration command argument blocks for JVM execution
+                // Construct complete structural command parameter array blocks for execution
                 val commandList = ArrayList<String>()
                 
-                // Points execution pipeline safely into the local JRE binary path
+                // Points process builders directly to the target environment executable path
                 commandList.add("${config.gameDirectory.absolutePath}/jre/bin/java") 
                 commandList.add("-Xmx${config.maxRamMb}M") 
                 
-                // FORCED SDK BINDING: Injects the desktop graphics compilation native pathways
+                // Hooks desktop graphics display native engines compilation bindings
                 commandList.add("-Djava.library.path=${nativesFolder.absolutePath}")
-                commandList.add("-cp")
-                commandList.add(gameJar.absolutePath)
                 
+                // BUILD COMPREHENSIVE CLASSPATH: Append main game jar and all downloaded library parameters together
+                commandList.add("-cp")
+                val classpathBuilder = StringBuilder()
+                classpathBuilder.append(gameJar.absolutePath)
+                
+                for (libPath in mojangLibraries) {
+                    // Inject appropriate Linux filesystem array separation tokens cleanly
+                    classpathBuilder.append(":")
+                    classpathBuilder.append(libPath)
+                }
+                commandList.add(classpathBuilder.toString())
+                
+                // Main execute identifier entrypoint mapping
                 commandList.add("net.minecraft.client.main.Main") 
                 commandList.add("--username")
                 commandList.add(config.playerUsername)
@@ -51,12 +62,12 @@ class MinecraftLauncher(private val context: Context) {
                 commandList.add("--accessToken")
                 commandList.add(config.accessToken)
 
-                // Instantiate runtime environment controller streams
+                // Execute process builders inside localized target directory frameworks
                 val processBuilder = ProcessBuilder(commandList)
                 processBuilder.directory(config.gameDirectory)
                 processBuilder.redirectErrorStream(true)
                 
-                // Deploy process execution thread
+                // Deploy active execution threads
                 val process = processBuilder.start()
                 
                 true
