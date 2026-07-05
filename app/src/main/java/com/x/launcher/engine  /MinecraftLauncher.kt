@@ -9,29 +9,35 @@ import java.io.File
 class MinecraftLauncher(private val context: Context) {
 
     /**
-     * Constructs the official JVM argument stream parameters 
-     * and boots up the Java process thread.
+     * Constructs the official JVM argument stream parameters and hooks dynamic 
+     * compiled native SDK components directly into the active runtime processes channel.
      */
     suspend fun bootGame(config: LaunchConfig): Boolean {
         return withContext(Dispatchers.IO) {
             try {
                 val gameJar = File(config.gameDirectory, "client-${config.gameVersion}.jar")
+                val nativesFolder = File(config.gameDirectory, "natives")
                 
-                if (!gameJar.exists()) {
+                if (!gameJar.exists() || !nativesFolder.exists()) {
                     withContext(Dispatchers.Main) {
-                        Toast.makeText(context, "Error: Game core files missing! Please download version first.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, "Error: Game assets or SDK Natives missing! Aborting boot.", Toast.LENGTH_LONG).show()
                     }
                     return@withContext false
                 }
 
-                // Construct structural command argument pipeline for Runtime Process Execution
+                // Construct complete system configuration command argument blocks for JVM execution
                 val commandList = ArrayList<String>()
-                commandList.add("java") // Local execution runtime binary hook
-                commandList.add("-Xmx${config.maxRamMb}M") // Set heap boundary allocations
-                commandList.add("-Djava.library.path=${config.gameDirectory.absolutePath}/natives")
+                
+                // Points execution pipeline safely into the local JRE binary path
+                commandList.add("${config.gameDirectory.absolutePath}/jre/bin/java") 
+                commandList.add("-Xmx${config.maxRamMb}M") 
+                
+                // FORCED SDK BINDING: Injects the desktop graphics compilation native pathways
+                commandList.add("-Djava.library.path=${nativesFolder.absolutePath}")
                 commandList.add("-cp")
                 commandList.add(gameJar.absolutePath)
-                commandList.add("net.minecraft.client.main.Main") // Core Main execution entrypoint
+                
+                commandList.add("net.minecraft.client.main.Main") 
                 commandList.add("--username")
                 commandList.add(config.playerUsername)
                 commandList.add("--version")
@@ -45,23 +51,21 @@ class MinecraftLauncher(private val context: Context) {
                 commandList.add("--accessToken")
                 commandList.add(config.accessToken)
 
-                // Execute runtime subsystem environment builders
+                // Instantiate runtime environment controller streams
                 val processBuilder = ProcessBuilder(commandList)
                 processBuilder.directory(config.gameDirectory)
                 processBuilder.redirectErrorStream(true)
                 
-                // Starts the virtual execution context channel thread
+                // Deploy process execution thread
                 val process = processBuilder.start()
                 
-                // Handle process input tracking hooks in background pipelines later...
                 true
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(context, "Boot Execution Error: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "SDK Boot Execution Error: ${e.message}", Toast.LENGTH_LONG).show()
                 }
                 false
             }
         }
     }
 }
-
