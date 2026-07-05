@@ -43,7 +43,8 @@ class MainActivity : AppCompatActivity() {
 
         // 1. Top Left Toolbar: Open and switch between different player profiles
         binding.btnAccountManager.setOnClickListener {
-            Toast.makeText(this, "Opening Accounts Manager Screen...", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, AccountManagerActivity::class.java)
+            startActivity(intent)
         }
 
         // 2. Top Right Toolbar: Modern Sync and download queue status monitor
