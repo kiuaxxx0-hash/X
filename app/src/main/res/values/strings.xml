@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Core Application Metadata Details -->
+    <string name="app_name">X Launcher</string>
+    <string name="launcher_version_label">Version 1.0.0-Beta-X</string>
+    <string name="developer_credit">Developed with X-Engine Technology</string>
+
+    <!-- Main Dashboard Controls Labels -->
+    <string name="btn_play_text">Play</string>
+    <string name="btn_edit_profile_text">Edit Profile</string>
+    <string name="account_type_github">GITHUB account</string>
+    <string name="account_type_offline">OFFLINE account</string>
+    <string name="default_username">kiua</string>
+    <string name="default_version">1.20.1</string>
+
+    <!-- Advanced Settings Configuration Screen -->
+    <string name="settings_title">X Launcher - Advanced Settings</string>
+    <string name="settings_category_performance">Performance &amp; Engine</string>
+    <string name="settings_category_customization">Customization &amp; Controls</string>
+    <string name="settings_java_label">Java Version Settings (Exclusive Runtime Switcher)</string>
+    <string name="settings_ram_label">Smart RAM Allocation (AI Managed Profile)</string>
+    <string name="settings_jvm_label">Custom JVM Arguments (Imported from HyperX)</string>
+    <string name="settings_touch_label">Virtual Touch Controls Layout Editor</string>
+    <string name="settings_resolution_label">Dynamic Game Internal Resolution Render</string>
+    <string name="settings_theme_label">Launcher Theme Appearance (XML Drawables Engine)</string>
+
+    <!-- Integrated File Manager Labels -->
+    <string name="file_manager_title">Storage / X-Launcher / .minecraft</string>
+    <string name="file_manager_quick_access">Quick Access</string>
+    <string name="file_manager_header_name">Name</string>
+    <string name="file_manager_header_actions">Actions</string>
+
+    <!-- Central Mods Hub & API Store Items -->
+    <string name="mods_store_title">Central Mods Hub (Modrinth &amp; CurseForge)</string>
+    <string name="mods_store_providers">API Providers</string>
+    <string name="mods_store_categories">Categories</string>
+    <string name="mods_store_dependency_title">Dependency Engine</string>
+    <string name="mods_store_auto_filter">Auto-Filtering: Active Version</string>
+
+    <!-- Virtual Touch Controls Touch Mapping Labels -->
+    <string name="touch_editor_title">X Touch Mapping - Layout Editor</string>
+    <string name="touch_editor_inspector">Key Modifier Inspectors</string>
+    <string name="touch_editor_scale">Dynamic Layout Scale Size</string>
+    <string name="touch_editor_opacity">Key Alpha / Opacity Render</string>
+    <string name="touch_editor_save">Save Mapping Profile</string>
+
+    
+    <string name="auth_manager_title">X Identity - Profile Identity Manager</string>
+    <string name="auth_manager_add_title">Add New Profile</string>
+    <string name="auth_manager_btn_add">Add Offline Account</string>
+    <string name="auth_manager_saved_title">Active &amp; Saved Sessions</string>
+    
+    <!-- Navigation Shared Text Buttons -->
+    <string name="btn_back">Back</string>
+</resources>
+
