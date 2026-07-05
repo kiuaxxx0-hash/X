@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://android.com"
+    xmlns:app="http://android.com"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_black"
+    android:padding="16dp">
+
+    <!-- Top Navigation Bar: Title, Directory Path, and Back Action -->
+    <LinearLayout
+        android:id="@+id/fileManagerTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btnFileManagerBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:textColor="@color/text_white"
+            android:background="@drawable/btn_black_bg"
+            android:textAllCaps="false"/>
+
+        <TextView
+            android:id="@+id/txtCurrentPath"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Storage / X-Launcher / .minecraft"
+            android:textColor="@color/text_white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"/>
+    </LinearLayout>
+
+    <!-- Main Workspace Splitter View Components -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:baselineAligned="false"
+        app:layout_constraintTop_toBottomOf="@id/fileManagerTopBar"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Left Navigation Panel: Quick Access Shortcuts Sidebar -->
+        <LinearLayout
+            android:layout_width="180dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/card_creamy_bg"
+            android:padding="12dp"
+            android:layout_marginEnd="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quick Access"
+                android:textColor="@color/text_black"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Shortcut Items: Mods, Resourcepacks, Saves placeholders -->
+            <View android:id="@+id/shortcutMods" android:layout_width="match_parent" android:layout_height="35dp" android:background="@drawable/btn_black_bg" android:layout_marginBottom="8dp"/>
+            <View android:id="@+id/shortcutResourcePacks" android:layout_width="match_parent" android:layout_height="35dp" android:background="@drawable/btn_black_bg" android:layout_marginBottom="8dp"/>
+            <View android:id="@+id/shortcutSaves" android:layout_width="match_parent" android:layout_height="35dp" android:background="@drawable/btn_black_bg" android:layout_marginBottom="8dp"/>
+            <View android:id="@+id/shortcutConfigs" android:layout_width="match_parent" android:layout_height="35dp" android:background="@drawable/btn_black_bg"/>
+        </LinearLayout>
+
+        <!-- Right File Browser Pane: Primary Content Explorer View -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@drawable/card_creamy_bg"
+            android:padding="16dp"
+            android:layout_marginStart="8dp">
+
+            <!-- File List Header Details Controls -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp">
+                
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:textColor="@color/text_black"
+                    android:textStyle="bold"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Actions"
+                    android:textColor="@color/text_black"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:layout_alignParentEnd="true"/>
+            </RelativeLayout>
+
+            <!-- Mock Directory Content List Rows to view the layout rendering -->
+            <View android:layout_width="match_parent" android:layout_height="45dp" android:background="@drawable/btn_black_bg" android:layout_marginBottom="8dp"/>
+            <View android:layout_width="match_parent" android:layout_height="45dp" android:background="@drawable/btn_black_bg" android:layout_marginBottom="8dp"/>
+            <View android:layout_width="match_parent" android:layout_height="45dp" android:background="@drawable/btn_black_bg" android:layout_marginBottom="8dp"/>
+            <View android:layout_width="match_parent" android:layout_height="45dp" android:background="@drawable/btn_black_bg"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
