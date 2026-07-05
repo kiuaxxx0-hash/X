@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://android.com"
+    xmlns:app="http://android.com"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_black"
+    android:padding="12dp">
+
+    <!-- Top Navigation and Tool Management Layout Row -->
+    <LinearLayout
+        android:id="@+id/layoutControlsTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btnControlsEditorBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:textColor="@color/text_white"
+            android:background="@drawable/btn_black_bg"
+            android:textAllCaps="false"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="X Touch Mapping - Layout Editor"
+            android:textColor="@color/text_white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"/>
+    </LinearLayout>
+
+    <!-- Split Screen Design Workspace Structure -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp"
+        android:baselineAligned="false"
+        app:layout_constraintTop_toBottomOf="@id/layoutControlsTopBar"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Left Display Canvas Screen: Visualizing Virtual Key Placement Map -->
+        <RelativeLayout
+            android:id="@+id/canvasLayoutContainer"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#151515"
+            android:layout_marginEnd="6dp">
+
+            <!-- Mock D-Pad Forward Virtual Key Component Render -->
+            <Button
+                android:id="@+id/btnMockVirtualKeyW"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="W"
+                android:textColor="@color/text_white"
+                android:textSize="12sp"
+                android:background="@drawable/btn_black_bg"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp"/>
+
+            <!-- Mock Inventory Open Virtual Key Component Render -->
+            <Button
+                android:id="@+id/btnMockVirtualKeyInv"
+                android:layout_width="65dp"
+                android:layout_height="40dp"
+                android:text="INV"
+                android:textColor="@color/text_white"
+                android:textSize="11sp"
+                android:background="@drawable/btn_black_bg"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="30dp"/>
+        </RelativeLayout>
+
+        <!-- Right Controller Options Bar: Settings Property Inspectors Panel -->
+        <LinearLayout
+            android:layout_width="220dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/card_creamy_bg"
+            android:padding="12dp"
+            android:layout_marginStart="6dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Key Modifier Inspectors"
+                android:textColor="@color/text_black"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Scale Transformer Control Row Option -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dynamic Layout Scale Size"
+                android:textColor="@color/gray_text"
+                android:textSize="11sp"/>
+            <View android:id="@+id/scaleControlTrack" android:layout_width="match_parent" android:layout_height="35dp" android:background="@drawable/btn_black_bg" android:layout_marginTop="4dp" android:layout_marginBottom="12dp"/>
+
+            <!-- Opacity Modifier Translucent Control Row Option -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Key Alpha / Opacity Render"
+                android:textColor="@color/gray_text"
+                android:textSize="11sp"/>
+            <View android:id="@+id/opacityControlTrack" android:layout_width="match_parent" android:layout_height="35dp" android:background="@drawable/btn_black_bg" android:layout_marginTop="4dp" android:layout_marginBottom="16dp"/>
+
+            <!-- Execution Commit and Persist Configuration Buttons -->
+            <Button
+                android:id="@+id/btnSaveVirtualControlLayout"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="Save Mapping Profile"
+                android:textColor="@color/text_white"
+                android:background="@drawable/btn_black_bg"
+                android:textSize="12sp"
+                android:textAllCaps="false"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
