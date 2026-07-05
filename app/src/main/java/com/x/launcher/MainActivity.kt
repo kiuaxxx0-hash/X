@@ -1,5 +1,6 @@
 package com.x.launcher
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -85,7 +86,7 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * Orchestrates the active background execution timeline for X Launcher core game services.
-     * Extracts parameters from the account sub-system dynamically to inject into the JVM stream.
+     * Reads saved RAM allocation matrices dynamically from local system preferences.
      */
     private fun executeGameLaunchPipeline() {
         val internalStorageDir = File(filesDir, "X-Launcher")
@@ -96,6 +97,10 @@ class MainActivity : AppCompatActivity() {
         val launcher = MinecraftLauncher(this)
         val currentAccount = accountManager.getActiveAccount()
 
+        // Read dynamically configured RAM profiles from custom user tweaks settings
+        val prefs = getSharedPreferences("XLauncher_Settings", Context.MODE_PRIVATE)
+        val allocatedRam = prefs.getInt("KEY_MAX_RAM", 2048) // Dynamically defaults to 2GB if empty
+
         Toast.makeText(this, "X-Engine verifying package integrity...", Toast.LENGTH_SHORT).show()
 
         lifecycleScope.launch {
@@ -105,7 +110,7 @@ class MainActivity : AppCompatActivity() {
                 // Assemble runtime application parameter blocks dynamically from stored profile data
                 val config = LaunchConfig(
                     gameVersion = currentSelectedVersion,
-                    maxRamMb = 2048,
+                    maxRamMb = allocatedRam, // Dynamic allocated user RAM injected here cleanly
                     gameDirectory = gameDirectory,
                     assetsDirectory = assetsDirectory,
                     playerUsername = currentAccount.username,
