@@ -39,11 +39,15 @@ class MainActivity : AppCompatActivity() {
             activeAccount = accountManager.createOfflineAccount("kiua")
         }
 
-        // Render application data models directly into layout interface blocks
+        // Render dynamic text fields directly into layout view targets
         binding.txtAccountName.text = activeAccount.username
         binding.txtPanelAccountName.text = activeAccount.username
         binding.txtAccountType.text = "${activeAccount.accountType.name} account"
         binding.txtSelectedVersion.text = currentSelectedVersion
+
+        // DYNAMIC SKIN RENDERING APPLIED: Assign chosen placeholder avatar indicators into Image views
+        binding.imgAccountAvatar.setImageResource(R.drawable.ic_player_head_placeholder)
+        binding.imgMainAvatar3D.setImageResource(R.drawable.ic_player_head_placeholder)
 
         // 1. Top Left Toolbar: Open and switch between different player profiles
         binding.btnAccountManager.setOnClickListener {
