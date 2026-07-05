@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://android.com"
+    xmlns:app="http://android.com"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_black"
+    android:padding="16dp">
+
+    <!-- Top Navigation Row: Back Action and Context Title -->
+    <LinearLayout
+        android:id="@+id/versionSelectorTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btnVersionSelectorBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:textColor="@color/text_white"
+            android:background="@drawable/btn_black_bg"
+            android:textAllCaps="false"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="X Client Manager - Select Game Version"
+            android:textColor="@color/text_white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"/>
+    </LinearLayout>
+
+    <!-- Core Content Split Layout Panel Structure -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:baselineAligned="false"
+        app:layout_constraintTop_toBottomOf="@id/versionSelectorTopBar"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Left View Panel: Index Category Filters Selection Layout -->
+        <LinearLayout
+            android:layout_width="160dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/card_creamy_bg"
+            android:padding="12dp"
+            android:layout_marginEnd="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Manifest Filter"
+                android:textColor="@color/text_black"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Interactive Toggle Filters mapping variables inside the system -->
+            <View android:id="@+id/filterReleases" android:layout_width="match_parent" android:layout_height="40dp" android:background="@drawable/btn_black_bg" android:layout_marginBottom="8dp"/>
+            <View android:id="@+id/filterSnapshots" android:layout_width="match_parent" android:layout_height="40dp" android:background="@drawable/btn_black_bg"/>
+        </LinearLayout>
+
+        <!-- Right View Panel: Interactive Scrollable Matrix rows for versions -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@drawable/card_creamy_bg"
+            android:padding="16dp"
+            android:layout_marginStart="8dp">
+
+            <!-- Mock Interactive Versions Component Select Elements to interact with phone screen -->
+            <Button android:id="@+id/btnSelectVersion1_21" android:layout_width="match_parent" android:layout_height="45dp" android:text="Official Release 1.21" android:textColor="@color/text_white" android:background="@drawable/btn_black_bg" android:layout_marginBottom="8dp" android:textAllCaps="false"/>
+            <Button android:id="@+id/btnSelectVersion1_20_1" android:layout_width="match_parent" android:layout_height="45dp" android:text="Official Release 1.20.1" android:textColor="@color/text_white" android:background="@drawable/btn_black_bg" android:layout_marginBottom="8dp" android:textAllCaps="false"/>
+            <Button android:id="@+id/btnSelectVersion1_16_5" android:layout_width="match_parent" android:layout_height="45dp" android:text="Official Release 1.16.5" android:textColor="@color/text_white" android:background="@drawable/btn_black_bg" android:textAllCaps="false"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.Cons
