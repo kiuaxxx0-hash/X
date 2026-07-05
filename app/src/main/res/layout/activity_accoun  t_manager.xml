@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://android.com"
+    xmlns:app="http://android.com"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_black"
+    android:padding="16dp">
+
+    <!-- Top Navigation Bar: Title and Back Action -->
+    <LinearLayout
+        android:id="@+id/accountManagerTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btnAccountBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:textColor="@color/text_white"
+            android:background="@drawable/btn_black_bg"
+            android:textAllCaps="false"/>
+
+        
+    </LinearLayout>
+
+    <!-- Main Workspace Splitter View Components -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:baselineAligned="false"
+        app:layout_constraintTop_toBottomOf="@id/accountManagerTopBar"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Left Panel: Create New Offline Profile Input Controls -->
+        <LinearLayout
+            android:layout_width="260dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/card_creamy_bg"
+            android:padding="16dp"
+            android:layout_marginEnd="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add New Profile"
+                android:textColor="@color/text_black"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Placeholder for Username Input Field -->
+            <View 
+                android:id="@+id/inputOfflineUsername"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/btn_black_bg"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Action Button to Save and Create Account -->
+            <Button
+                android:id="@+id/btnCreateOfflineProfile"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="Add Offline Account"
+                android:textAllCaps="false"
+                android:textColor="@color/text_white"
+                android:background="@drawable/btn_black_bg"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- Right Panel: Currently Active and Saved Accounts Registry List -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@drawable/card_creamy_bg"
+            android:padding="16dp"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Active &amp; Saved Sessions"
+                android:textColor="@color/text_black"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Mock Saved Sessions List Rows to view the layout rendering -->
+            <View android:id="@+id/accountRowItem1" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/btn_black_bg" android:layout_marginBottom="8dp"/>
+            <View android:id="@+id/accountRowItem2" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/btn_black_bg" android:layout_marginBottom="8dp"/>
+            <View android:id="@+id/accountRowItem3" android:layout_width="match_parent" android:layout_height="50dp" android:background="@drawable/btn_black_bg"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
