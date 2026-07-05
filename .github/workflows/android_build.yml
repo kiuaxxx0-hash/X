@@ -1,12 +1,11 @@
 name: X Launcher Auto-Build CI
 
-# Triggers the pipeline automated compiler on every push or manual run trigger
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  workflow_dispatch: # Allows you to trigger the build manually from GitHub Actions tab
+  workflow_dispatch:
 
 jobs:
   build:
@@ -14,31 +13,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the source repository code context safely into the builder server
       - name: Checkout Repository Source
         uses: actions/checkout@v4
 
-      # Step 2: Set up Java Development Kit (JDK 17) required by X-Launcher compilation parameters
       - name: Set up JDK 17 Environment
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: 'gradle'
 
-      # Step 3: Grant raw execution capability to the Gradle Wrapper file inside the pipeline
-      - name: Grant Execute Permissions for Gradle Wrapper
-        run: chmod +x gradlew
+      # ADVANCED INTEGRATION: Automatically downloads and installs the missing official gradle environment binaries
+      - name: Setup Official Gradle Toolchain Runtime
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.2
 
-      # Step 4: Run the compiler compilation array scripts to assemble the Debug APK binary
-      - name: Build with Gradle Toolchain
-        run: ./gradlew assembleDebug --stacktrace
+      - name: Build and Assemble Debug APK
+        run: gradle assembleDebug --stacktrace
 
-      # Step 5: Upload the freshly compiled X-Launcher APK package into GitHub artifacts memory
       - name: Upload Output APK Artifact Bundle
         uses: actions/upload-artifact@v4
         with:
           name: X-Launcher-Compiled-Build
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
-          
