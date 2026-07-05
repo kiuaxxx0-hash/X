@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.x.launcher.auth.AccountManager
+import com.x.launcher.auth.AccountType
 import com.x.launcher.databinding.ActivityMainBinding
 import com.x.launcher.engine.GameDownloader
 import com.x.launcher.engine.LaunchConfig
@@ -15,6 +17,7 @@ import java.io.File
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var accountManager: AccountManager
     private val currentSelectedVersion = "1.20.1"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +26,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Bind the current client game version text to the visual dashboard view
+        // Initialize the account subsystem context
+        accountManager = AccountManager(this)
+
+        // Setup a default account for "kiua" if the storage is completely empty
+        var activeAccount = accountManager.getActiveAccount()
+        if (activeAccount.username == "Guest_X") {
+            activeAccount = accountManager.createOfflineAccount("kiua")
+        }
+
+        // Dynamically update UI state to match the loaded account data properties
+        binding.txtAccountName.text = activeAccount.username
+        binding.txtPanelAccountName.text = activeAccount.username
+        binding.txtAccountType.text = "${activeAccount.accountType.name} account"
         binding.txtSelectedVersion.text = currentSelectedVersion
 
         // 1. Top Left Toolbar: Open and switch between different player profiles
@@ -69,36 +84,34 @@ class MainActivity : AppCompatActivity() {
 
     /**
      * Orchestrates the active background execution timeline for X Launcher core game services.
-     * Checks storage indexes, auto-downloads missing binary resources, and invokes the JVM boot thread.
+     * Extracts parameters from the account sub-system dynamically to inject into the JVM stream.
      */
     private fun executeGameLaunchPipeline() {
-        // Instantiate operational file-system pathways inside the sandbox storage environment
         val internalStorageDir = File(filesDir, "X-Launcher")
         val gameDirectory = File(internalStorageDir, ".minecraft")
         val assetsDirectory = File(gameDirectory, "assets")
 
         val downloader = GameDownloader(this)
         val launcher = MinecraftLauncher(this)
+        val currentAccount = accountManager.getActiveAccount()
 
         Toast.makeText(this, "X-Engine verifying package integrity...", Toast.LENGTH_SHORT).show()
 
         lifecycleScope.launch {
-            // Step 1: Ensure localized game jar exists, auto-download if missing
             val isReady = downloader.downloadGameVersion(currentSelectedVersion, gameDirectory)
             
             if (isReady) {
-                // Step 2: Assemble runtime application parameter blocks 
+                // Assemble runtime application parameter blocks dynamically from stored profile data
                 val config = LaunchConfig(
                     gameVersion = currentSelectedVersion,
-                    maxRamMb = 2048, // Default 2GB heap boundary allocation
+                    maxRamMb = 2048,
                     gameDirectory = gameDirectory,
                     assetsDirectory = assetsDirectory,
-                    playerUsername = "kiua",
-                    playerUuid = "00000000-0000-0000-0000-000000000000",
-                    accessToken = "00000000000000000000000000000000"
+                    playerUsername = currentAccount.username,
+                    playerUuid = currentAccount.uuid,
+                    accessToken = currentAccount.accessToken
                 )
 
-                // Step 3: Trigger low-level binary execution threads
                 val bootSuccess = launcher.bootGame(config)
                 if (bootSuccess) {
                     Toast.makeText(this@MainActivity, "Game process deployed successfully!", Toast.LENGTH_SHORT).show()
