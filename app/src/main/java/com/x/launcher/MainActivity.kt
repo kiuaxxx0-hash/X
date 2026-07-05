@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var accountManager: AccountManager
-    private val currentSelectedVersion = "1.20.1"
+    private var currentSelectedVersion = "1.20.1"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,16 +27,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Initialize the account subsystem context
         accountManager = AccountManager(this)
 
-        // Setup a default account for "kiua" if the storage is completely empty
+        // Read dynamically cached client target settings directly from structural preferences
+        val settingsPrefs = getSharedPreferences("XLauncher_Settings", Context.MODE_PRIVATE)
+        currentSelectedVersion = settingsPrefs.getString("KEY_SELECTED_VERSION", "1.20.1") ?: "1.20.1"
+
+        // Set default offline fallback identities cleanly if layout workspace variables are blank
         var activeAccount = accountManager.getActiveAccount()
         if (activeAccount.username == "Guest_X") {
             activeAccount = accountManager.createOfflineAccount("kiua")
         }
 
-        // Dynamically update UI state to match the loaded account data properties
+        // Render application data models directly into layout interface blocks
         binding.txtAccountName.text = activeAccount.username
         binding.txtPanelAccountName.text = activeAccount.username
         binding.txtAccountType.text = "${activeAccount.accountType.name} account"
@@ -73,20 +76,37 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // 6. Right Control Board: Edit skins, offline nicknames, or premium assets
+        // 6. Right Control Board: Route player context into full interactive version selectors panel
+        binding.versionSelector.setOnClickListener {
+            val intent = Intent(this, VersionSelectorActivity::class.java)
+            startActivityForResult(intent, 2002)
+        }
+
+        // 7. Right Control Board: Edit skins, offline nicknames, or premium assets
         binding.btnEditProfile.setOnClickListener {
             Toast.makeText(this, "Profile customize interface is under active development!", Toast.LENGTH_SHORT).show()
         }
 
-        // 7. Right Control Board: Execute core game engine download and launch routines
+        // 8. Right Control Board: Execute core game engine download and launch routines
         binding.btnPlay.setOnClickListener {
             executeGameLaunchPipeline()
         }
     }
 
     /**
+     * Intercepts callbacks dispatched from children activity frameworks to map variables instantly.
+     */
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 2002 && resultCode == RESULT_OK) {
+            val newlySelectedVersion = data?.getStringExtra("UPDATED_VERSION") ?: currentSelectedVersion
+            currentSelectedVersion = newlySelectedVersion
+            binding.txtSelectedVersion.text = newlySelectedVersion
+        }
+    }
+
+    /**
      * Orchestrates the active background execution timeline for X Launcher core game services.
-     * Reads saved RAM allocation matrices dynamically from local system preferences.
      */
     private fun executeGameLaunchPipeline() {
         val internalStorageDir = File(filesDir, "X-Launcher")
@@ -97,9 +117,8 @@ class MainActivity : AppCompatActivity() {
         val launcher = MinecraftLauncher(this)
         val currentAccount = accountManager.getActiveAccount()
 
-        // Read dynamically configured RAM profiles from custom user tweaks settings
         val prefs = getSharedPreferences("XLauncher_Settings", Context.MODE_PRIVATE)
-        val allocatedRam = prefs.getInt("KEY_MAX_RAM", 2048) // Dynamically defaults to 2GB if empty
+        val allocatedRam = prefs.getInt("KEY_MAX_RAM", 2048)
 
         Toast.makeText(this, "X-Engine verifying package integrity...", Toast.LENGTH_SHORT).show()
 
@@ -107,10 +126,9 @@ class MainActivity : AppCompatActivity() {
             val isReady = downloader.downloadGameVersion(currentSelectedVersion, gameDirectory)
             
             if (isReady) {
-                // Assemble runtime application parameter blocks dynamically from stored profile data
                 val config = LaunchConfig(
                     gameVersion = currentSelectedVersion,
-                    maxRamMb = allocatedRam, // Dynamic allocated user RAM injected here cleanly
+                    maxRamMb = allocatedRam,
                     gameDirectory = gameDirectory,
                     assetsDirectory = assetsDirectory,
                     playerUsername = currentAccount.username,
