@@ -6,9 +6,9 @@
     android:layout_height="match_parent"
     android:background="@color/bg_black">
 
-    <!-- Top Left Corner: Mini User Card -->
+    <!-- Top Left Corner: Accounts Manager Entry Button -->
     <LinearLayout
-        android:id="@+id/topUserCard"
+        android:id="@+id/btnAccountManager"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -16,16 +16,21 @@
         android:paddingHorizontal="16dp"
         android:paddingVertical="8dp"
         android:gravity="center_vertical"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
         android:layout_margin="16dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart="toStartOf="parent">
 
         <View
+            android:id="@+id/imgAccountAvatar"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:background="#CCCCCC"/> <!-- Temporary placeholder for head icon -->
+            android:background="#CCCCCC"/> <!-- Placeholder for Head Icon -->
 
         <TextView
+            android:id="@+id/txtAccountName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="kiua"
@@ -34,7 +39,7 @@
             android:layout_marginStart="8dp" />
     </LinearLayout>
 
-    <!-- Top Right Corner: Action Bar with 4 Controls -->
+    <!-- Top Right Corner: Feature Action Bar (Now with 5 Buttons) -->
     <LinearLayout
         android:id="@+id/topActionBar"
         android:layout_width="wrap_content"
@@ -42,13 +47,48 @@
         android:orientation="horizontal"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
+        android:gravity="center_vertical"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <View android:layout_width="32dp" android:layout_height="32dp" android:background="#FFFFFF" android:layout_marginEnd="16dp"/> <!-- Refresh Button -->
-        <View android:layout_width="32dp" android:layout_height="32dp" android:background="#FFFFFF" android:layout_marginEnd="16dp"/> <!-- Files Button -->
-        <View android:layout_width="32dp" android:layout_height="32dp" android:background="#FFFFFF" android:layout_marginEnd="16dp"/> <!-- Download Button -->
-        <View android:layout_width="32dp" android:layout_height="32dp" android:background="#FFFFFF"/> <!-- Settings Button -->
+        <!-- 1. Modern Sync & Download Progress Status Button -->
+        <View 
+            android:id="@+id/btnDownloadProgress"
+            android:layout_width="32dp" 
+            android:layout_height="32dp" 
+            android:background="#FFFFFF" 
+            android:layout_marginEnd="16dp"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <!-- 2. Integrated File Manager Button -->
+        <View 
+            android:id="@+id/btnInternalFileManager"
+            android:layout_width="32dp" 
+            android:layout_height="32dp" 
+            android:background="#FFFFFF" 
+            android:layout_marginEnd="16dp"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <!-- 3. Mods & Addons Store Button -->
+        <View 
+            android:id="@+id/btnModsStore"
+            android:layout_width="32dp" 
+            android:layout_height="32dp" 
+            android:background="#FFFFFF" 
+            android:layout_marginEnd="16dp"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <!-- 4. Advanced & Exclusive Settings Button -->
+        <View 
+            android:id="@+id/btnAdvancedSettings"
+            android:layout_width="32dp" 
+            android:layout_height="32dp" 
+            android:background="#FFFFFF"
+            android:clickable="true"
+            android:focusable="true"/>
     </LinearLayout>
 
     <!-- Center: Main Vector Logo X -->
@@ -80,12 +120,14 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <View
+            android:id="@+id/imgMainAvatar3D"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:background="#AAAAAA"
-            android:layout_marginTop="8dp"/> <!-- Placeholder for 3D Character Avatar -->
+            android:layout_marginTop="8dp"/> <!-- 3D Character Avatar View -->
 
         <TextView
+            android:id="@+id/txtPanelAccountName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="KIUA"
@@ -95,6 +137,7 @@
             android:layout_marginTop="4dp"/>
 
         <TextView
+            android:id="@+id/txtAccountType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="GITHUB account"
@@ -119,7 +162,9 @@
             android:layout_height="50dp"
             android:background="@drawable/btn_black_bg"
             android:paddingHorizontal="12dp"
-            android:layout_marginTop="16dp">
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusable="true">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -134,6 +179,7 @@
                     android:textStyle="bold"
                     android:textSize="14sp"/>
                 <TextView
+                    android:id="@+id/txtSelectedVersion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="26.2"
@@ -156,4 +202,3 @@
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-              
