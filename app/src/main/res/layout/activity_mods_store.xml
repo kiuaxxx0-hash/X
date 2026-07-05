@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://android.com"
+    xmlns:app="http://android.com"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_black"
+    android:padding="16dp">
+
+    <!-- Top Navigation Bar: Title, Search, and Auto-Version Indicator -->
+    <LinearLayout
+        android:id="@+id/modsStoreTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btnModsStoreBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:textColor="@color/text_white"
+            android:background="@drawable/btn_black_bg"
+            android:textAllCaps="false"/>
+
+        <!-- Search Input Bar for Modrinth & CurseForge API -->
+        <View
+            android:id="@+id/searchBarInput"
+            android:layout_width="220dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/btn_black_bg"/>
+
+        <!-- NEW: Auto-Filter Active Version Indicator Badge -->
+        <LinearLayout
+            android:id="@+id/layoutAutoVersionBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:background="@drawable/btn_black_bg"
+            android:paddingHorizontal="12dp"
+            android:gravity="center_vertical"
+            android:layout_marginStart="12dp">
+            
+            <TextView
+                android:id="@+id/txtAutoFilterStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Auto-Filtering: Active Version (26.2)"
+                android:textColor="#00FFCC"
+                android:textSize="11sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="X Central Mods Hub"
+            android:textColor="@color/text_white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"/>
+    </LinearLayout>
+
+    <!-- Main Store Content Layout Workspace -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:baselineAligned="false"
+        app:layout_constraintTop_toBottomOf="@id/modsStoreTopBar"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Left Filter Panel: Provider Selection, Categories, & Dependency Alert -->
+        <LinearLayout
+            android:layout_width="170dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/card_creamy_bg"
+            android:padding="12dp"
+            android:layout_marginEnd="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="API Providers"
+                android:textColor="@color/text_black"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                android:layout_marginBottom="8dp"/>
+
+            <View android:id="@+id/providerModrinth" android:layout_width="match_parent" android:layout_height="35dp" android:background="@drawable/btn_black_bg" android:layout_marginBottom="8dp"/>
+            <View android:id="@+id/providerCurseForge" android:layout_width="match_parent" android:layout_height="35dp" android:background="@drawable/btn_black_bg" android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Categories"
+                android:textColor="@color/text_black"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                android:layout_marginBottom="8dp"/>
+
+            <View android:id="@+id/catMods" android:layout_width="match_parent" android:layout_height="35dp" android:background="@drawable/btn_black_bg" android:layout_marginBottom="8dp"/>
+            <View android:id="@+id/catResourcePacks" android:layout_width="match_parent" android:layout_height="35dp" android:background="@drawable/btn_black_bg" android:layout_marginBottom="16dp"/>
+
+            <!-- NEW: Smart Dependency Resolver Visual Feedback Status -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/btn_black_bg"
+                android:padding="8dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dependency Engine"
+                    android:textColor="@color/text_white"
+                    android:textStyle="bold"
+                    android:textSize="10sp"/>
+                <TextView
+                    android:id="@+id/txtDependencyStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Auto-Resolve ON"
+                    android:textColor="#FFFDD0"
+                    android:textSize="9sp"
+                    android:layout_marginTop="2dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Right Pane: Multi-Column Mod Grid Layout Renderer -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@drawable/card_creamy_bg"
+            android:padding="12dp"
+            android:layout_marginStart="8dp">
+
+            <!-- Grid Layout Row 1: Filtered API Mod Cards Layout Placeholder -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+                <View android:id="@+id/modCardItem1" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:background="@drawable/btn_black_bg" android:layout_marginEnd="4dp"/>
+                <View android:id="@+id/modCardItem2" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:background="@drawable/btn_black_bg" android:layout_marginStart="4dp"/>
+            </LinearLayout>
+
+            <!-- Grid Layout Row 2: Filtered API Mod Cards Layout Placeholder -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <View android:id="@+id/modCardItem3" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:background="@drawable/btn_black_bg" android:layout_marginEnd="4dp"/>
+                <View android:id="@+id/modCardItem4" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:background="@drawable/btn_black_bg" android:layout_marginStart="4dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
