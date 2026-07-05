@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_black">
 
-    <!-- Top Left Corner: Accounts Manager Entry Button -->
+    <!-- Top Left Corner: Accounts Manager Entry Button with Dynamic Image View -->
     <LinearLayout
         android:id="@+id/btnAccountManager"
         android:layout_width="wrap_content"
@@ -21,13 +21,9 @@
         android:foreground="?attr/selectableItemBackground"
         android:layout_margin="16dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart="toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
-        <View
-            android:id="@+id/imgAccountAvatar"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="#CCCCCC"/> <!-- Placeholder for Head Icon -->
+        
 
         <TextView
             android:id="@+id/txtAccountName"
@@ -39,7 +35,7 @@
             android:layout_marginStart="8dp" />
     </LinearLayout>
 
-    <!-- Top Right Corner: Feature Action Bar (Now with 5 Buttons) -->
+    <!-- Top Right Corner: Feature Action Bar -->
     <LinearLayout
         android:id="@+id/topActionBar"
         android:layout_width="wrap_content"
@@ -51,44 +47,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- 1. Modern Sync & Download Progress Status Button -->
-        <View 
-            android:id="@+id/btnDownloadProgress"
-            android:layout_width="32dp" 
-            android:layout_height="32dp" 
-            android:background="#FFFFFF" 
-            android:layout_marginEnd="16dp"
-            android:clickable="true"
-            android:focusable="true"/>
-
-        <!-- 2. Integrated File Manager Button -->
-        <View 
-            android:id="@+id/btnInternalFileManager"
-            android:layout_width="32dp" 
-            android:layout_height="32dp" 
-            android:background="#FFFFFF" 
-            android:layout_marginEnd="16dp"
-            android:clickable="true"
-            android:focusable="true"/>
-
-        <!-- 3. Mods & Addons Store Button -->
-        <View 
-            android:id="@+id/btnModsStore"
-            android:layout_width="32dp" 
-            android:layout_height="32dp" 
-            android:background="#FFFFFF" 
-            android:layout_marginEnd="16dp"
-            android:clickable="true"
-            android:focusable="true"/>
-
-        <!-- 4. Advanced & Exclusive Settings Button -->
-        <View 
-            android:id="@+id/btnAdvancedSettings"
-            android:layout_width="32dp" 
-            android:layout_height="32dp" 
-            android:background="#FFFFFF"
-            android:clickable="true"
-            android:focusable="true"/>
+        <View android:id="@+id/btnDownloadProgress" android:layout_width="32dp" android:layout_height="32dp" android:background="#FFFFFF" android:layout_marginEnd="16dp" android:clickable="true" android:focusable="true"/>
+        <View android:id="@+id/btnInternalFileManager" android:layout_width="32dp" android:layout_height="32dp" android:background="#FFFFFF" android:layout_marginEnd="16dp" android:clickable="true" android:focusable="true"/>
+        <View android:id="@+id/btnModsStore" android:layout_width="32dp" android:layout_height="32dp" android:background="#FFFFFF" android:layout_marginEnd="16dp" android:clickable="true" android:focusable="true"/>
+        <View android:id="@+id/btnAdvancedSettings" android:layout_width="32dp" android:layout_height="32dp" android:background="#FFFFFF" android:clickable="true" android:focusable="true"/>
     </LinearLayout>
 
     <!-- Center: Main Vector Logo X -->
@@ -100,6 +62,101 @@
         android:contentDescription="X Launcher Logo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/rightControlPanel" />
+
+    <!-- Right Side: Main Control Dashboard Card with Dynamic Big Skin View -->
+    <LinearLayout
+        android:id="@+id/rightControlPanel"
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:background="@drawable/card_creamy_bg"
+        android:padding="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/topActionBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        
+
+        <TextView
+            android:id="@+id/txtPanelAccountName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="KIUA"
+            android:textColor="@color/text_black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="4dp"/>
+
+        <TextView
+            android:id="@+id/txtAccountType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GITHUB account"
+            android:textColor="@color/gray_text"
+            android:textSize="12sp"/>
+
+        <Button
+            android:id="@+id/btnEditProfile"
+            android:layout_width="140dp"
+            android:layout_height="35dp"
+            android:text="Edit Profile"
+            android:textAllCaps="false"
+            android:textColor="@color/text_white"
+            android:background="@drawable/btn_black_bg"
+            android:layout_marginTop="8dp"
+            android:textSize="12sp"/>
+
+        <RelativeLayout
+            android:id="@+id/versionSelector"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/btn_black_bg"
+            android:paddingHorizontal="12dp"
+            android:layout_marginTop="16dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerVertical="true">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Version"
+                    android:textColor="@color/text_white"
+                    android:textStyle="bold"
+                    android:textSize="14sp"/>
+                <TextView
+                    android:id="@+id/txtSelectedVersion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="26.2"
+                    android:textColor="#AAAAAA"
+                    android:textSize="10sp"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btnPlay"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Play"
+            android:textColor="@color/text_white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:background="@drawable/btn_black_bg"
+            android:layout_marginTop="16dp"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/rightControlPanel" />
 
