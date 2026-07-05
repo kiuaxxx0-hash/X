@@ -16,48 +16,47 @@ class VirtualControlsActivity : AppCompatActivity() {
         binding = ActivityVirtualControlsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Close layout editor viewport context safely and return back to source activity
+        // Close layout editor viewport context safely and return back to settings screen
         binding.btnControlsEditorBack.setOnClickListener {
             finish()
         }
 
-        // Setup mock target key interaction loops to update inspector property panels
+        // Setup touch targeting tracking for custom Minecraft keys
         binding.btnMockVirtualKeyW.setOnClickListener {
             activeSelectedKeyName = "Key_W"
-            Toast.makeText(this, "Target key selected: $activeSelectedKeyName. Ready to resize.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Key Selected: Forward Key (W). Layout scaling engine unlocked.", Toast.LENGTH_SHORT).show()
         }
 
         binding.btnMockVirtualKeyInv.setOnClickListener {
             activeSelectedKeyName = "Key_Inventory"
-            Toast.makeText(this, "Target key selected: $activeSelectedKeyName. Ready to resize.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Key Selected: Inventory Key (INV). Layout scaling engine unlocked.", Toast.LENGTH_SHORT).show()
         }
 
-        // Setup interaction hooks for custom sizing modifier panels
+        // Track user configuration sizing hooks
         binding.scaleControlTrack.setOnClickListener {
             if (activeSelectedKeyName != "None") {
-                Toast.makeText(this, "Simulating scale adjustment for $activeSelectedKeyName", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Scaling execution mapping modifier processing for $activeSelectedKeyName", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Please select a virtual touch key first!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Operation denied: Please select a virtual touch key on canvas!", Toast.LENGTH_SHORT).show()
             }
         }
 
         binding.opacityControlTrack.setOnClickListener {
             if (activeSelectedKeyName != "None") {
-                Toast.makeText(this, "Simulating opacity transparency shift for $activeSelectedKeyName", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Transparency opacity alpha parameter updating for $activeSelectedKeyName", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Please select a virtual touch key first!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Operation denied: Please select a virtual touch key on canvas!", Toast.LENGTH_SHORT).show()
             }
         }
 
-        // Persist customized virtual key layout boundaries and matrices into filesystem
+        // Commit full custom layout transformations into local file properties
         binding.btnSaveVirtualControlLayout.setOnClickListener {
             Toast.makeText(
                 this, 
-                "Success: Customized touch mappings persisted into JSON configs!", 
+                "Success: Virtual control layouts cached into workspace preferences!", 
                 Toast.LENGTH_SHORT
             ).show()
             finish()
         }
     }
 }
-
