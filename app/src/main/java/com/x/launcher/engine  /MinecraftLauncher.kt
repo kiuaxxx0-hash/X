@@ -2,6 +2,8 @@ package com.x.launcher.engine
 
 import android.content.Context
 import android.widget.Toast
+import com.x.launcher.libs.LibsEnvironmentManager
+import com.x.launcher.libs.UltimateLibsEngine
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -26,6 +28,10 @@ class MinecraftLauncher(private val context: Context) {
                     return@withContext false
                 }
 
+                // Deploy and verify our absolute #1 private ultimate libraries suite inside the filesystem
+                val libsEngine = UltimateLibsEngine(context)
+                libsEngine.deployUltimateLibrariesBundle(config.gameDirectory)
+
                 // SECURITY OVERRIDE: Unlock Linux execution tokens inside Android sandbox filesystems
                 try {
                     val chmodProcess = Runtime.getRuntime().exec(arrayOf("chmod", "+x", javaBinary.absolutePath))
@@ -40,7 +46,7 @@ class MinecraftLauncher(private val context: Context) {
                 // Set low-level runtime dependencies pointer
                 commandList.add("-Djava.library.path=${nativesFolder.absolutePath}")
                 
-                // Assemble Classpath stream components
+                // Assemble Classpath stream components together
                 commandList.add("-cp")
                 val classpathBuilder = StringBuilder()
                 classpathBuilder.append(gameJar.absolutePath)
@@ -68,20 +74,10 @@ class MinecraftLauncher(private val context: Context) {
                 processBuilder.directory(config.gameDirectory)
                 processBuilder.redirectErrorStream(true)
 
-                // ================= NUMBER ONE ENGINES INJECTION =================
-                val environment = processBuilder.environment()
-                
-                // FORCE MESA 3D VULKAN GRAPHICS PIPELINES (ZINK ENGINE)
-                environment["GALLIUM_DRIVER"] = "zink"
-                environment["MESA_LOADER_DRIVER_OVERRIDE"] = "zink"
-                environment["LIBGL_DRI3_DISABLE"] = "0" 
-                environment["VULKAN_DRIVER"] = "turnip" // Optimizes Qualcomm Snapdragon Adreno chipsets
-                environment["LD_LIBRARY_PATH"] = nativesFolder.absolutePath
-
-                // HOOK BHOOK SYSTEM LOG TRACKER ENVIRONMENT DEFINITIONS
-                environment["BHOOK_CAPTURE_EXIT"] = "1"
-                environment["PROGRADE_SANDBOX_STRICT"] = "1"
-                // ================================================================
+                // INVOKE SYSTEMIC LIBS REDIRECTION INTERFACES
+                // Injects the complete Vulkan graphics pipeline and dynamic library hooks cleanly
+                val environmentManager = LibsEnvironmentManager()
+                environmentManager.injectSecretPerformanceVariables(processBuilder, config.gameDirectory)
 
                 val process = processBuilder.start()
                 true
