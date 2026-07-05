@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout 
+    xmlns:android="http://android.com"
+    xmlns:app="http://android.com"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_black"
+    android:padding="16dp">
+
+    <!-- Top Bar: Title and Back Button -->
+    <LinearLayout
+        android:id="@+id/settingsTopBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btnSettingsBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:textColor="@color/text_white"
+            android:background="@drawable/btn_black_bg"
+            android:textAllCaps="false"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="X Launcher - Advanced Settings"
+            android:textColor="@color/text_white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginStart="16dp"/>
+    </LinearLayout>
+
+    <!-- Main Content Panel split into 2 Creamy Cards for high organization -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:baselineAligned="false"
+        app:layout_constraintTop_toBottomOf="@id/settingsTopBar"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Left Column: Java & Performance Optimization Options -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@drawable/card_creamy_bg"
+            android:padding="16dp"
+            android:layout_marginEnd="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Performance &amp; Engine"
+                android:textColor="@color/text_black"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Option 1: Java Runtime Architecture Selection -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Java Version Settings (Exclusive Runtime Switcher)"
+                android:textColor="@color/gray_text"
+                android:textSize="12sp"/>
+            <View android:layout_width="match_parent" android:layout_height="40dp" android:background="@drawable/btn_black_bg" android:layout_marginTop="4dp" android:layout_marginBottom="12dp"/>
+
+            <!-- Option 2: Advanced Ram Allocation Slider placeholder -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Smart RAM Allocation (AI Managed Profile)"
+                android:textColor="@color/gray_text"
+                android:textSize="12sp"/>
+            <View android:layout_width="match_parent" android:layout_height="40dp" android:background="@drawable/btn_black_bg" android:layout_marginTop="4dp" android:layout_marginBottom="12dp"/>
+
+            <!-- Option 3: HyperX Custom Flags renderer -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Custom JVM Arguments (Imported from HyperX)"
+                android:textColor="@color/gray_text"
+                android:textSize="12sp"/>
+            <View android:layout_width="match_parent" android:layout_height="40dp" android:background="@drawable/btn_black_bg" android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <!-- Right Column: Interface Customization & In-Game Mods Tools -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="@drawable/card_creamy_bg"
+            android:padding="16dp"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Customization &amp; Controls"
+                android:textColor="@color/text_black"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginBottom="12dp"/>
+
+            <!-- Option 4: Custom Control Renderer Layout -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Virtual Virtual Touch Controls Layout Editor"
+                android:textColor="@color/gray_text"
+                android:textSize="12sp"/>
+            <View android:layout_width="match_parent" android:layout_height="40dp" android:background="@drawable/btn_black_bg" android:layout_marginTop="4dp" android:layout_marginBottom="12dp"/>
+
+            <!-- Option 5: Game Resolution & Scale Customization -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dynamic Game Internal Resolution Render"
+                android:textColor="@color/gray_text"
+                android:textSize="12sp"/>
+            <View android:layout_width="match_parent" android:layout_height="40dp" android:background="@drawable/btn_black_bg" android:layout_marginTop="4dp" android:layout_marginBottom="12dp"/>
+
+            <!-- Option 6: Client Side Custom Branding Options -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Launcher Theme Appearance (XML Drawables Engine)"
+                android:textColor="@color/gray_text"
+                android:textSize="12sp"/>
+            <View android:layout_width="match_parent" android:layout_height="40dp" android:background="@drawable/btn_black_bg" android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
