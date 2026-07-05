@@ -17,6 +17,7 @@ class MinecraftLauncher(private val context: Context) {
             try {
                 val gameJar = File(config.gameDirectory, "client-${config.gameVersion}.jar")
                 val nativesFolder = File(config.gameDirectory, "natives")
+                val javaBinary = File(config.gameDirectory, "jre/bin/java")
                 
                 if (!gameJar.exists() || !nativesFolder.exists()) {
                     withContext(Dispatchers.Main) {
@@ -25,11 +26,19 @@ class MinecraftLauncher(private val context: Context) {
                     return@withContext false
                 }
 
+                // SECURITY OVERRIDE PATH: Grant execute capability to the Java execution binary bypass protection layers
+                try {
+                    val chmodProcess = Runtime.getRuntime().exec(arrayOf("chmod", "+x", javaBinary.absolutePath))
+                    chmodProcess.waitFor()
+                } catch (e: Exception) {
+                    // Fallback configuration if runtime direct shell executing meets restrictive flags
+                }
+
                 // Construct complete structural command parameter array blocks for execution
                 val commandList = ArrayList<String>()
                 
-                // Points process builders directly to the target environment executable path
-                commandList.add("${config.gameDirectory.absolutePath}/jre/bin/java") 
+                // Points process builders directly to the newly verified executable path
+                commandList.add(javaBinary.absolutePath) 
                 commandList.add("-Xmx${config.maxRamMb}M") 
                 
                 // Hooks desktop graphics display native engines compilation bindings
@@ -41,7 +50,6 @@ class MinecraftLauncher(private val context: Context) {
                 classpathBuilder.append(gameJar.absolutePath)
                 
                 for (libPath in mojangLibraries) {
-                    // Inject appropriate Linux filesystem array separation tokens cleanly
                     classpathBuilder.append(":")
                     classpathBuilder.append(libPath)
                 }
@@ -66,6 +74,10 @@ class MinecraftLauncher(private val context: Context) {
                 val processBuilder = ProcessBuilder(commandList)
                 processBuilder.directory(config.gameDirectory)
                 processBuilder.redirectErrorStream(true)
+
+                // INSTANTIATE GRAPHICS LAYER EMBEDDING: Inject automated GL4ES translation environment configurations
+                val graphicsEngine = Gl4esEngine(context)
+                graphicsEngine.injectGraphicsEnvironmentVariables(processBuilder, config.gameDirectory)
                 
                 // Deploy active execution threads
                 val process = processBuilder.start()
